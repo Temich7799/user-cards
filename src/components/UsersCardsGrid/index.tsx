@@ -4,43 +4,10 @@ import { useQuery } from 'react-query';
 import LoadingScreen from 'components/LoadingScreen';
 import UserCard from 'components/UserCard';
 
-import { fetchUsers, IUsersResponse } from 'api/users';
-import { IUser } from 'ts/models';
-import { getRandomIndexesMap } from 'utils';
+import { IUserCard } from './types';
+import { getUsers, initialCount, replaceRandomCards } from './utils';
 
 import styles from './styles.module.scss';
-
-type IUserCard = {
-  id: string;
-  content: IUser;
-};
-
-const formatUsersResponse = (response: IUsersResponse): IUserCard[] => {
-  return response.results.map((user) => ({
-    id: user.login.uuid,
-    content: user,
-  }));
-};
-
-const getUsers = async (count: number): Promise<IUserCard[]> => {
-  const response = await fetchUsers(count);
-  return formatUsersResponse(response);
-};
-
-const initialCount = 10;
-
-const replaceRandomCards = (oldCards: IUserCard[], newCards: IUserCard[]): IUserCard[] => {
-  const indexesToChange = getRandomIndexesMap(newCards.length, initialCount);
-
-  const updatedCards = oldCards.map((card, index) => {
-    if (indexesToChange.has(index)) {
-      return newCards.pop();
-    }
-    return card;
-  });
-
-  return updatedCards as IUserCard[];
-};
 
 const UsersCardsGrid = () => {
   const { current } = useRef({
