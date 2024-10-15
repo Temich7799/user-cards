@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useQuery } from 'react-query';
 
+import LoadingScreen from 'components/LoadingScreen';
 import UserCard from 'components/UserCard';
 
 import { fetchUsers, IUsersResponse } from 'api/users';
@@ -26,8 +27,10 @@ const getUsers = async (count: number): Promise<IUserCard[]> => {
   return formatUsersResponse(response);
 };
 
+const initialCount = 10;
+
 const replaceRandomCards = (oldCards: IUserCard[], newCards: IUserCard[]): IUserCard[] => {
-  const indexesToChange = getRandomIndexesMap(newCards.length);
+  const indexesToChange = getRandomIndexesMap(newCards.length, initialCount);
 
   const updatedCards = oldCards.map((card, index) => {
     if (indexesToChange.has(index)) {
@@ -38,8 +41,6 @@ const replaceRandomCards = (oldCards: IUserCard[], newCards: IUserCard[]): IUser
 
   return updatedCards as IUserCard[];
 };
-
-const initialCount = 10;
 
 const UsersCardsGrid = () => {
   const { current } = useRef({
@@ -73,7 +74,7 @@ const UsersCardsGrid = () => {
     return () => clearTimeout(timerId);
   }, [refetch, current, cards]);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <LoadingScreen />;
   if (error) return <div>Error loading cards</div>;
 
   return (
