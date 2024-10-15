@@ -1,0 +1,47 @@
+.userCard {
+    background-color: #e0bbff; 
+    border-radius: 8px; 
+    padding: 16px; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+    align-items: center; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.2s; 
+
+    @media (max-width: 960px) {
+      flex: 1 1 calc(50% - 10px); 
+    }
+
+    @media (max-width: 600px) {
+      flex: 1 1 100%; 
+    }
+  }
+
+  .cardTitle {
+    font-size: 1.5rem; 
+    font-weight: bold; 
+    margin-bottom: 8px; 
+    text-align: center; 
+  }
+
+  .cardBody {
+    flex-grow: 1; 
+    text-align: center; 
+    font-size: 1rem; 
+  }
+
+  .cardAction {
+    margin-top: 12px; 
+    padding: 8px 16px; 
+    background-color: #6200ea; 
+    color: white; 
+    border: none; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    transition: background-color 0.2s; 
+
+    &:hover {
+      background-color: #3700b3; 
+    }
+  }
