@@ -3,9 +3,16 @@ import { useQuery } from 'react-query';
 
 import UserCard from 'components/UserCard';
 
-import { IUserCard, IUsersResponse } from 'ts/models';
+import { fetchUsers, IUsersResponse } from 'api/users';
+import { IUser } from 'ts/models';
+import { getRandomIndexesMap } from 'utils';
 
 import styles from './styles.module.scss';
+
+type IUserCard = {
+  id: string;
+  content: IUser;
+};
 
 const formatUsersResponse = (response: IUsersResponse): IUserCard[] => {
   return response.results.map((user) => ({
@@ -14,13 +21,9 @@ const formatUsersResponse = (response: IUsersResponse): IUserCard[] => {
   }));
 };
 
-const getRandomIndexesMap = (count: number) => {
-  const indexesMap = new Map<number, number>();
-  while (indexesMap.size < count) {
-    const randomIndex = Math.floor(Math.random() * count);
-    indexesMap.set(randomIndex, randomIndex);
-  }
-  return indexesMap;
+const getUsers = async (count: number): Promise<IUserCard[]> => {
+  const response = await fetchUsers(count);
+  return formatUsersResponse(response);
 };
 
 const replaceRandomCards = (oldCards: IUserCard[], newCards: IUserCard[]): IUserCard[] => {
@@ -37,15 +40,6 @@ const replaceRandomCards = (oldCards: IUserCard[], newCards: IUserCard[]): IUser
 };
 
 const initialCount = 10;
-
-const getUsers = async (count: number = initialCount): Promise<IUserCard[]> => {
-  const res = await fetch('https://randomuser.me/api/?results=' + count);
-  if (!res.ok) {
-    throw new Error('Network response was not ok');
-  }
-  const data = await res.json();
-  return formatUsersResponse(data);
-};
 
 const UsersCardsGrid = () => {
   const { current } = useRef({

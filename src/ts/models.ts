@@ -66,18 +66,3 @@ export interface IUser {
   picture: IPicture;
   nat: string;
 }
-
-export interface IUserCard {
-  id: string;
-  content: IUser;
-}
-
-export interface IUsersResponse {
-  results: IUser[];
-  info: {
-    seed: string;
-    results: number;
-    page: number;
-    version: string;
-  };
-}
