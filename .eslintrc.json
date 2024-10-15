@@ -39,9 +39,8 @@
       "version": "detect"
     },
     "import/resolver": {
-      "typescript": {},
       "node": {
-        "paths": ["."],
+        "paths": ["./src"],
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     }
