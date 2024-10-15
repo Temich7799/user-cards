@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import UsersCardsGrid from 'components/CardsGrid';
+import UsersCardsGrid from 'components/UsersCardsGrid';
 
 import styles from './styles.module.scss';
 
