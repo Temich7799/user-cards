@@ -9,43 +9,83 @@
   }
 }
 
+$s-min: 20;
+$s-max: 70;
+$l-min: 30;
+$l-max: 90;
+
 .userCard {
-  background-color: #e0bbff;
-  border-radius: 16px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(75px, 1fr));
-  align-items: center;
+  background-color: #fffaf0;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  grid-gap: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
-  justify-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  transition: transform 0.3s ease-in-out;
   animation: fadeIn 0.5s ease-in-out;
 
-  @media (max-width: 960px) {
-    justify-items: baseline;
+  .cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 25px;
+    font-weight: bold;
+    color: #333;
+    height: 100%;
+
+    h2 {
+      margin: 0;
+    }
+  }
+
+  .cardBody {
+    text-align: center;
+    margin-bottom: 12px;
   }
 
   .cardPhoto {
-    height: 100%;
-    max-height: 300px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
 
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 16px;
     }
   }
 
-  .cardBody {
-    overflow: hidden;
-    max-width: 100px;
+  .cardDetails {
+    font-size: 14px;
+    color: #777;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
   }
 
-  .cardText {
-    text-align: center;
-    margin-bottom: 4px;
-    text-overflow: ellipsis;
-    font-size: 14px;
+  .cardFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    
+    .viewButton {
+      background-color: #000;
+      color: #fff;
+      border-radius: 24px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #333;
+      }
+    }
   }
 }
