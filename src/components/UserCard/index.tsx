@@ -29,7 +29,12 @@ const UserCard = ({ data }: UserCardProps) => {
             alt={data.name.first}
           />
         </div>
-        <button className={styles.viewButton}>View</button>
+        <a
+          href="#"
+          className={styles.viewButton}
+        >
+          View
+        </a>
       </div>
     </div>
   );
